@@ -2,6 +2,10 @@ import { useState } from "react";
 import { LEVELS } from "./types";
 import Icon from "@/components/ui/icon";
 
+interface LevelsScreenProps {
+  onStartMission: (levelId: number) => void;
+}
+
 function Stars({ count, max = 3 }: { count: number; max?: number }) {
   return (
     <div className="flex gap-0.5">
@@ -14,7 +18,7 @@ function Stars({ count, max = 3 }: { count: number; max?: number }) {
   );
 }
 
-export function LevelsScreen() {
+export function LevelsScreen({ onStartMission }: LevelsScreenProps) {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
@@ -89,7 +93,10 @@ export function LevelsScreen() {
                     <p className="text-xs text-gray-500">с выбором ответов</p>
                   </div>
                 </div>
-                <button className="btn-game btn-orange w-full flex items-center justify-center gap-2">
+                <button
+                  className="btn-game btn-orange w-full flex items-center justify-center gap-2"
+                  onClick={() => onStartMission(level.id)}
+                >
                   <Icon name="Play" size={18} />
                   Начать миссию!
                 </button>
